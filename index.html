@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Invitación 💌</title>
+
+  <style>
+    :root{
+      --bg1:#0f1226; --bg2:#1b1140; --card: rgba(255,255,255,.08);
+      --text:#f5f7ff; --muted: rgba(245,247,255,.75);
+      --accent:#ff6aa2; --accent2:#ffd36a;
+      --border: rgba(255,255,255,.15);
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 22px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0; font-family:var(--font); color:var(--text);
+      min-height:100vh; display:grid; place-items:center;
+      background:
+        radial-gradient(1200px 800px at 20% 10%, rgba(255,106,162,.25), transparent 55%),
+        radial-gradient(1000px 700px at 90% 30%, rgba(255,211,106,.18), transparent 55%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      overflow-x:hidden;
+    }
+
+    .wrap{width:min(920px, 92vw); padding:28px 0}
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .topbar{
+      padding:18px 22px;
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+    }
+
+    .badge{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:8px 12px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.12);
+      font-size:14px; color:var(--muted);
+    }
+
+    .title{
+      padding:26px 22px 10px;
+      text-align:left;
+    }
+
+    h1{
+      margin:0 0 8px;
+      font-size: clamp(28px, 4vw, 44px);
+      letter-spacing:.2px;
+      line-height:1.1;
+    }
+
+    .subtitle{
+      margin:0;
+      color:var(--muted);
+      font-size: clamp(15px, 2vw, 18px);
+      line-height:1.5;
+    }
+
+    .content{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      padding:18px 22px 22px;
+      align-items:start;
+    }
+
+    @media (max-width: 820px){
+      .content{grid-template-columns: 1fr}
+    }
+
+    .panel{
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.12);
+      border-radius: 18px;
+      padding:16px;
+      min-width:0;
+    }
+
+    .row{
+      display:flex; gap:12px; align-items:flex-start;
+      padding:10px 0;
+      border-bottom:1px dashed rgba(255,255,255,.14);
+    }
+
+    .row:last-child{border-bottom:0}
+
+    .icon{
+      width:38px; height:38px; border-radius:12px;
+      display:grid; place-items:center;
+      background: linear-gradient(135deg, rgba(255,106,162,.22), rgba(255,211,106,.16));
+      border:1px solid rgba(255,255,255,.18);
+      flex:0 0 auto;
+      font-size:18px;
+    }
+
+    .label{font-size:13px; color:var(--muted); margin:0}
+    .value{font-size:16px; margin:2px 0 0; line-height:1.35}
+
+    .actions{
+      display:flex; flex-wrap:wrap; gap:10px;
+      padding-top:12px;
+    }
+
+    button{
+      cursor:pointer;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.10);
+      color:var(--text);
+      padding:12px 14px;
+      border-radius: 14px;
+      font-size:15px;
+      transition: transform .08s ease, background .2s ease;
+    }
+
+    button:hover{background: rgba(255,255,255,.14)}
+    button:active{transform: scale(.98)}
+
+    .primary{
+      border:0;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color:#2b1230;
+      font-weight:700;
+    }
+
+    .footer{
+      padding:16px 22px 22px;
+      color:rgba(245,247,255,.62);
+      font-size:12px;
+      display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
+      border-top:1px solid rgba(255,255,255,.10);
+    }
+
+    .sparkle{
+      position:absolute; inset:-80px;
+      background:
+        radial-gradient(2px 2px at 15% 30%, rgba(255,255,255,.55), transparent 60%),
+        radial-gradient(2px 2px at 45% 70%, rgba(255,255,255,.4), transparent 60%),
+        radial-gradient(2px 2px at 75% 35%, rgba(255,255,255,.45), transparent 60%),
+        radial-gradient(2px 2px at 85% 75%, rgba(255,255,255,.35), transparent 60%);
+      pointer-events:none;
+      opacity:.7;
+    }
+
+    .hidden{display:none}
+
+    .answer{
+      margin-top:10px;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.18);
+      color:var(--text);
+    }
+
+    /* ===== FOTO: para que NO rompa el layout y sea responsive ===== */
+    .panel.photo{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      min-width:0;
+    }
+
+    .photoWrap{
+      width:100%;
+      max-width:100%;
+      border-radius: 18px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.18);
+      aspect-ratio: 16 / 10;  /* cambia: 4/5 (vertical) | 1/1 (cuadrada) */
+    }
+
+    .photoWrap img{
+      width:100%;
+      height:100%;
+      max-width:100%;
+      display:block;
+      object-fit: cover;
+      object-position:center;
+    }
+
+    .caption{
+      margin:0;
+      color: var(--muted);
+      font-size:14px;
+      line-height:1.45;
+      text-align:center;
+      padding:10px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.12);
+    }
+
+    @media (max-width: 820px){
+      .photoWrap{
+        aspect-ratio: 16 / 12;
+        max-height: 320px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="sparkle"></div>
+
+      <div class="topbar">
+        <div class="badge">💌 Invitación especial</div>
+        <div class="badge" id="today"></div>
+      </div>
+
+      <div class="title">
+        <h1>¿Aceptas una cita conmigo este <span style="color:var(--accent2)">14</span>? ✨</h1>
+        <p class="subtitle">No es cualquier plan… es un “tú y yo” bien bonito. 🫶</p>
+      </div>
+
+      <div class="content">
+        <!-- PANEL IZQUIERDO -->
+        <div class="panel">
+          <div class="row">
+            <div class="icon">📅</div>
+            <div>
+              <p class="label">Día</p>
+              <p class="value"><b>[14 de febrero]</b></p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="icon">⏰</div>
+            <div>
+              <p class="label">Hora</p>
+              <p class="value"><b>[7:00 PM]</b> (si te queda mejor, tú eliges 😌)</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="icon">📍</div>
+            <div>
+              <p class="label">Lugar</p>
+              <p class="value"><b>[Restaurante el Bohio]</b> — [Buenaventura]</p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="icon">🍽️</div>
+            <div>
+              <p class="label">Plan</p>
+              <p class="value">[Cena / caminata / ] + conversación 💬</p>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="primary" id="yesBtn">Sí, acepto 💖</button>
+            <button id="maybeBtn">Dame 5 min 😅</button>
+            <button id="copyBtn">Copiar detalles 📋</button>
+          </div>
+
+          <div id="response" class="answer hidden"></div>
+        </div>
+
+        <!-- PANEL DERECHO (FOTO) -->
+        <div class="panel photo">
+          <div class="photoWrap">
+            <img src="assets/foto.jpg" alt="Foto especial" />
+          </div>
+          <p class="caption">Contigo todo se siente bonito 💖</p>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div>Hecho con cariño por Juan🫶</div>
+        <div>Tip: abre el link en el celu para que se vea más lindo</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Fecha bonita arriba
+    const d = new Date();
+    const fmt = new Intl.DateTimeFormat('es-CO', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+    document.getElementById('today').textContent = '📆 ' + fmt.format(d);
+
+    const response = document.getElementById('response');
+    const show = (msg) => { response.textContent = msg; response.classList.remove('hidden'); };
+
+    document.getElementById('yesBtn').addEventListener('click', () => {
+      show('🥰 ¡Siiii! Entonces iré por ti hasta tu casa. Te amoooo. 💖');
+      confetti();
+    });
+
+    document.getElementById('maybeBtn').addEventListener('click', () => {
+      show('😄 Tranquii, piénsalo… pero yo ya estoy ilusionado/a. 💫');
+    });
+
+    document.getElementById('copyBtn').addEventListener('click', async () => {
+      const text =
+`Cita 💌
+Día: [14 de febrero]
+Hora: [7:00 PM]
+Lugar: [Restaurante el Bohio] — [Buenavntura]
+Plan: [Cena/…]`;
+      try{
+        await navigator.clipboard.writeText(text);
+        show('📋 Listo: copié los detalles para que los pegues en WhatsApp.');
+      }catch(e){
+        show('📋 No pude copiar automático. Selecciona y copia manualmente.');
+      }
+    });
+
+    // Confetti sencillo (sin librerías)
+    function confetti(){
+      const n=80;
+      for(let i=0;i<n;i++){
+        const p=document.createElement('div');
+        p.style.position='fixed';
+        p.style.left=(Math.random()*100)+'vw';
+        p.style.top='-10px';
+        p.style.width='8px';
+        p.style.height='12px';
+        p.style.opacity='0.9';
+        p.style.transform='rotate('+(Math.random()*360)+'deg)';
+        p.style.background='hsl('+(Math.random()*360)+' 90% 70%)';
+        p.style.borderRadius='2px';
+        p.style.zIndex='9999';
+        p.style.transition='transform 2.2s linear, top 2.2s linear, opacity 2.2s linear';
+        document.body.appendChild(p);
+        requestAnimationFrame(()=>{
+          p.style.top='110vh';
+          p.style.transform += ' translateY(110vh)';
+          p.style.opacity='0';
+        });
+        setTimeout(()=>p.remove(), 2400);
+      }
+    }
+  </script>
+</body>
+</html>
